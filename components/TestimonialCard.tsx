@@ -7,12 +7,17 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   return (
-    <div className="bg-white dark:bg-secondaryDark rounded-lg shadow-md p-6 w-full max-w-sm transform hover:scale-105 transition-transform duration-300">
+    <div className="bg-white dark:bg-dark-card rounded-lg shadow-md p-6 w-full max-w-sm transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+      {/* Star Rating */}
       <div className="flex items-center justify-center mb-4">
         {[...Array(5)].map((_, i) => (
           <svg
             key={i}
-            className={`w-6 h-6 ${i < testimonial.rating ? 'text-accent' : 'text-gray-300 dark:text-gray-600'}`}
+            className={`w-6 h-6 ${
+              i < testimonial.rating
+                ? 'text-accent dark:text-accent' // Keep accent in both modes
+                : 'text-gray-300 dark:text-gray-500'
+            }`}
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -21,10 +26,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
           </svg>
         ))}
       </div>
-      <p className="text-lightText dark:text-darkText italic mb-4 text-center">
+
+      {/* Quote */}
+      <p className="text-lightText dark:text-dark-textSecondary italic mb-4 text-center leading-relaxed">
         "{testimonial.quote}"
       </p>
-      <p className="text-right font-semibold text-primaryDark dark:text-primaryLight">
+
+      {/* Author */}
+      <p className="text-right font-semibold text-primaryDark dark:text-primary-400">
         - {testimonial.author}
       </p>
     </div>

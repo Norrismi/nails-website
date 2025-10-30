@@ -21,8 +21,17 @@ module.exports = {
             500: "#fbbf24", 600: "#f59e0b", 700: "#d97706", 800: "#b45309",
             900: "#92400e",
           },
-          dark: { bg: "#0f0f1a", card: "#1a1a2e", text: "#e2e8f0" },
-          light: { bg: "#fafafa", card: "#ffffff", text: "#1a1a1a" },
+          dark: {
+            bg: "#0f0f1a",
+            card: "#1a1a2e",
+            text: "#e2e8f0",           // Main readable text in dark mode
+            textSecondary: "#94a3b8",  // Subtle text (descriptions, quotes)
+          },
+          light: {
+            bg: "#fafafa",
+            card: "#ffffff",
+            text: "#1a1a1a",
+          },
         },
         fontFamily: {
           heading: ['"Playfair Display"', "serif"],
@@ -44,9 +53,18 @@ module.exports = {
           float: "float 6s ease-in-out infinite",
         },
         keyframes: {
-          fadeIn: { "0%": { opacity: "0", transform: "translateY(20px)" }, "100%": { opacity: "1", transform: "translateY(0)" } },
-          slideUp: { "0%": { transform: "translateY(50px)", opacity: "0" }, "100%": { transform: "translateY(0)", opacity: "1" } },
-          float: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10px)" } },
+          fadeIn: {
+            "0%": { opacity: "0", transform: "translateY(20px)" },
+            "100%": { opacity: "1", transform: "translateY(0)" }
+          },
+          slideUp: {
+            "0%": { transform: "translateY(50px)", opacity: "0" },
+            "100%": { transform: "translateY(0)", opacity: "1" }
+          },
+          float: {
+            "0%, 100%": { transform: "translateY(0)" },
+            "50%": { transform: "translateY(-10px)" }
+          },
         },
       },
     },

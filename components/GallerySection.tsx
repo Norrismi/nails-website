@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useMemo } from 'react';
 import { GALLERY_IMAGES } from '../constants';
 import { GalleryImage } from '../types';
@@ -9,9 +8,7 @@ const GallerySection: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   const filteredImages = useMemo(() => {
-    if (filter === 'all') {
-      return GALLERY_IMAGES;
-    }
+    if (filter === 'all') return GALLERY_IMAGES;
     return GALLERY_IMAGES.filter((image) => image.category === filter);
   }, [filter]);
 
@@ -23,75 +20,57 @@ const GallerySection: React.FC = () => {
     setSelectedImage(null);
   }, []);
 
-  const navigateLightbox = useCallback((direction: 'prev' | 'next') => {
-    if (!selectedImage) return;
+  const navigateLightbox = useCallback(
+    (direction: 'prev' | 'next') => {
+      if (!selectedImage) return;
 
-    const currentImageIndex = filteredImages.findIndex((img) => img.id === selectedImage.id);
-    let newIndex = currentImageIndex;
+      const currentIndex = filteredImages.findIndex((img) => img.id === selectedImage.id);
+      let newIndex = currentIndex;
 
-    if (direction === 'prev') {
-      newIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length;
-    } else {
-      newIndex = (currentImageIndex + 1) % filteredImages.length;
-    }
-    setSelectedImage(filteredImages[newIndex]);
-  }, [selectedImage, filteredImages]);
+      if (direction === 'prev') {
+        newIndex = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
+      } else {
+        newIndex = (currentIndex + 1) % filteredImages.length;
+      }
+      setSelectedImage(filteredImages[newIndex]);
+    },
+    [selectedImage, filteredImages]
+  );
 
   return (
-    <section id="gallery" className="py-16 bg-secondary dark:bg-secondaryDark transition-colors duration-300">
+    <section
+      id="gallery"
+      className="py-16 bg-lightBg dark:bg-darkBg transition-colors duration-300"
+    >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-playfair font-bold text-center mb-10 text-primaryDark dark:text-accent">
+        {/* Title */}
+        <h2 className="text-4xl font-playfair font-bold text-center mb-10 text-primaryDark dark:text-primary-400">
           Our Gallery
         </h2>
 
+        {/* Filter Buttons */}
         <div className="flex justify-center flex-wrap gap-4 mb-10">
-          <button
-            onClick={() => setFilter('all')}
-            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-              filter === 'all'
-                ? 'bg-primary dark:bg-primaryLight text-white shadow-md'
-                : 'bg-white dark:bg-darkBg text-primaryDark dark:text-darkText hover:bg-primaryLight/20 dark:hover:bg-primaryDark/50'
-            }`}
-          >
-            All
-          </button>
-          <button
-            onClick={() => setFilter('manicure')}
-            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-              filter === 'manicure'
-                ? 'bg-primary dark:bg-primaryLight text-white shadow-md'
-                : 'bg-white dark:bg-darkBg text-primaryDark dark:text-darkText hover:bg-primaryLight/20 dark:hover:bg-primaryDark/50'
-            }`}
-          >
-            Manicures
-          </button>
-          <button
-            onClick={() => setFilter('pedicure')}
-            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-              filter === 'pedicure'
-                ? 'bg-primary dark:bg-primaryLight text-white shadow-md'
-                : 'bg-white dark:bg-darkBg text-primaryDark dark:text-darkText hover:bg-primaryLight/20 dark:hover:bg-primaryDark/50'
-            }`}
-          >
-            Pedicures
-          </button>
-          <button
-            onClick={() => setFilter('nailart')}
-            className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-              filter === 'nailart'
-                ? 'bg-primary dark:bg-primaryLight text-white shadow-md'
-                : 'bg-white dark:bg-darkBg text-primaryDark dark:text-darkText hover:bg-primaryLight/20 dark:hover:bg-primaryDark/50'
-            }`}
-          >
-            Nail Art
-          </button>
+          {(['all', 'manicure', 'pedicure', 'nailart'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 capitalize ${
+                filter === tab
+                  ? 'bg-primary dark:bg-primary-500 text-white shadow-md'
+                  : 'bg-white dark:bg-dark-card text-primaryDark dark:text-dark-text hover:bg-primary-50 dark:hover:bg-primary-900/30'
+              }`}
+            >
+              {tab === 'all' ? 'All' : tab === 'manicure' ? 'Manicures' : tab === 'pedicure' ? 'Pedicures' : 'Nail Art'}
+            </button>
+          ))}
         </div>
 
+        {/* Image Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredImages.map((image) => (
             <div
               key={image.id}
-              className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-transform duration-300"
+              className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform hover:scale-105 transition-all duration-300"
               onClick={() => openLightbox(image)}
             >
               <img
@@ -101,13 +80,21 @@ const GallerySection: React.FC = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white text-lg font-semibold">{image.alt}</p>
+                <p className="text-white text-lg font-semibold drop-shadow-md">
+                  {image.alt}
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <Lightbox image={selectedImage} onClose={closeLightbox} onNavigate={navigateLightbox} />
+
+      {/* Lightbox */}
+      <Lightbox
+        image={selectedImage}
+        onClose={closeLightbox}
+        onNavigate={navigateLightbox}
+      />
     </section>
   );
 };
