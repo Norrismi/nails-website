@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Luxury Components */
+@layer components {
+  .glass {
+    @apply bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 rounded-2xl;
+  }
+
+  .btn-primary {
+    @apply px-8 py-3 rounded-full font-medium text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-center font-heading bg-gradient-to-r from-gold-400 to-gold-600 bg-clip-text text-transparent;
+  }
+
+  .card {
+    @apply p-6 rounded-2xl bg-white dark:bg-dark-card shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-2;
+  }
+}
