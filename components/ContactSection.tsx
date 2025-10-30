@@ -46,7 +46,7 @@ const ContactSection: React.FC = () => {
                 {CONTACT_INFO.address}
               </p>
 
-              {/* Phone */}
+              {/* Phone – OFFICIAL HEROICONS PHONE */}
               <p className="text-lg text-lightText dark:text-dark-textSecondary flex items-center justify-center lg:justify-start">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,12 +59,12 @@ const ContactSection: React.FC = () => {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.106l-1.412-.395m-.736 1.956l-3.486 1.743a.75.75 0 01-.932-.569A11.95 11.95 0 0112 21.75c-2.906 0-5.653-.9-7.875-2.42A13.95 13.95 0 01.25 6.75V4.5A2.25 2.25 0 012.5 2.25h1.372c.516 0 .966.351 1.106.852l.395 1.412M4.5 12.75l-.395 1.412a2.25 2.25 0 001.106 2.518L7.5 19.5m4.364-1.956l1.412.395M12 12.75a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75z"
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.106l-1.412-.395m-.736 1.956l-3.486 1.743a.75 .75 0 01-.932-.569A11.95 11.95 0 0112 21.75c-2.906 0-5.653-.9-7.875-2.42A13.95 13.95 0 01.25 6.75V4.5A2.25 2.25 0 012.5 2.25h1.372c.516 0 .966.351 1.106.852l.395 1.412M4.5 12.75l-.395 1.412a2.25 2.25 0 001.106 2.518L7.5 19.5m4.364-1.956l1.412.395M12 12.75a.75 .75 0 01.75-.75h7.5a.75 .75 0 010 1.5h-7.5a.75 .75 0 01-.75-.75z"
                   />
                 </svg>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="hover:text-primaryDark dark:hover:text-primary-300 transition-colors"
+                  className="hover:text-primaryDark dark:hover:text-primary-300 transition-colors duration-200"
                 >
                   {CONTACT_INFO.phone}
                 </a>
@@ -88,7 +88,7 @@ const ContactSection: React.FC = () => {
                 </svg>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-primaryDark dark:hover:text-primary-300 transition-colors"
+                  className="hover:text-primaryDark dark:hover:text-primary-300 transition-colors duration-200"
                 >
                   {CONTACT_INFO.email}
                 </a>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { ServiceCategoryType } from '../types';
+import type { ServiceCategory } from '../types';
 
 interface ServiceCategoryProps {
-  category: ServiceCategoryType;
+  category: ServiceCategory;
 }
 
 const ServiceCategory: React.FC<ServiceCategoryProps> = ({ category }) => {
