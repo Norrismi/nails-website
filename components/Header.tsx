@@ -1,9 +1,12 @@
+// components/Header.tsx
 import React, { useState, useCallback, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; // ← ADD useLocation if you want active state
 import HamburgerMenu from './HamburgerMenu';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const location = useLocation(); // Optional: for active styling
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -27,19 +30,45 @@ const Header: React.FC = () => {
     setIsMenuOpen(false);
   }, []);
 
+  // Optional: Highlight active link
+  const isActive = (path: string) => location.pathname === path;
+
   return (
     <header className="sticky top-0 z-50 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md border-b border-white/20 dark:border-dark-card/20 shadow-lg transition-colors duration-300">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Logo */}
         <div className="text-2xl font-playfair font-bold text-primary dark:text-primary-400">
-          <a href="#home" onClick={closeMenu}>Luxe Nails</a>
+          <Link to="/" onClick={closeMenu}>Luxe Nails</Link>
         </div>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-8 items-center">
-          <a href="#home" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Home</a>
+          <Link
+            to="/"
+            className={`text-lg font-medium transition-colors ${
+              isActive('/') ? 'text-primary dark:text-primary-400' : 'text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300'
+            }`}
+            onClick={closeMenu}
+          >
+            Home
+          </Link>
           <a href="#services" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Services</a>
           <a href="#about" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">About</a>
           <a href="#gallery" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Gallery</a>
           <a href="#contact" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Contact</a>
+
+          {/* BOOK BUTTON — Always visible */}
+          <Link
+            to="/book"
+            className={`px-5 py-2 text-lg font-bold rounded-full transition-all ${
+              isActive('/book')
+                ? 'bg-gradient-gold text-primaryDark shadow-md'
+                : 'bg-primary/10 text-primary dark:text-primary-400 hover:bg-primary/20 dark:hover:bg-primary-400/20'
+            }`}
+            onClick={closeMenu}
+          >
+            Book Now
+          </Link>
 
           {/* Theme Toggle */}
           <button
@@ -58,12 +87,13 @@ const Header: React.FC = () => {
               </svg>
             ) : (
               <svg className="w-5 h-5 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                <path d="M17.293 13.293A8 8 0 616.707 2.707a8.001 8.001 0 1010.586 10.586z" />
               </svg>
             )}
           </button>
         </nav>
 
+        {/* Mobile */}
         <div className="md:hidden flex items-center space-x-4">
           <button
             onClick={() => {
@@ -85,6 +115,7 @@ const Header: React.FC = () => {
               </svg>
             )}
           </button>
+
           <HamburgerMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} onNavLinkClick={closeMenu} />
         </div>
       </div>

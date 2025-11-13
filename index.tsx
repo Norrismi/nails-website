@@ -1,11 +1,11 @@
+// index.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom"; // ← ADD THIS
 import App from "./App";
-import "./index.css";          // ← THIS LINE
+import "./index.css";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root")!
-);
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 // Dark-mode persistence
 const saved = localStorage.getItem("theme");
@@ -18,6 +18,8 @@ if (initial === "dark") {
 
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

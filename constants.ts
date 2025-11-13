@@ -1,4 +1,4 @@
-
+// constants/index.ts
 import { ServiceCategory, Testimonial, GalleryImage } from './types';
 
 export const SERVICE_CATEGORIES: ServiceCategory[] = [
@@ -131,6 +131,7 @@ export const CONTACT_INFO = {
   address: '123 Beauty Blvd, Spa City, SC 12345',
   phone: '(123) 456-7890',
   email: 'info@luxenailandspa.com',
+  googleMapsLink: 'https://www.google.com/maps/search/?api=1&query=123+Beauty+Blvd,+Spa+City,+SC+12345',
   hours: {
     mondayFriday: 'Mon - Fri: 9:00 AM - 7:00 PM',
     saturday: 'Sat: 10:00 AM - 6:00 PM',
