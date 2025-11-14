@@ -1,12 +1,12 @@
 // components/Header.tsx
 import React, { useState, useCallback, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // ← ADD useLocation if you want active state
+import { Link, useLocation } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
-  const location = useLocation(); // Optional: for active styling
+  const location = useLocation();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -30,7 +30,6 @@ const Header: React.FC = () => {
     setIsMenuOpen(false);
   }, []);
 
-  // Optional: Highlight active link
   const isActive = (path: string) => location.pathname === path;
 
   return (
@@ -41,8 +40,8 @@ const Header: React.FC = () => {
           <Link to="/" onClick={closeMenu}>Luxe Nails</Link>
         </div>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-8 items-center">
+        {/* Desktop Nav — Only Home + Book */}
+        <nav className="hidden md:flex items-center space-x-8">
           <Link
             to="/"
             className={`text-lg font-medium transition-colors ${
@@ -52,12 +51,7 @@ const Header: React.FC = () => {
           >
             Home
           </Link>
-          <a href="#services" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Services</a>
-          <a href="#about" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">About</a>
-          <a href="#gallery" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Gallery</a>
-          <a href="#contact" className="text-lg font-medium text-light-text dark:text-dark-text hover:text-primary dark:hover:text-primary-300 transition-colors">Contact</a>
 
-          {/* BOOK BUTTON — Always visible */}
           <Link
             to="/book"
             className={`px-5 py-2 text-lg font-bold rounded-full transition-all ${
@@ -93,7 +87,7 @@ const Header: React.FC = () => {
           </button>
         </nav>
 
-        {/* Mobile */}
+        {/* Mobile — Hamburger + Theme */}
         <div className="md:hidden flex items-center space-x-4">
           <button
             onClick={() => {
@@ -123,4 +117,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Header;// cache-bust Thu Nov 13 19:02:19 EST 2025
