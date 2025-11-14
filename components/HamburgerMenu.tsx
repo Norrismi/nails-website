@@ -24,23 +24,23 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, toggleMenu, onNav
   }
 
   return (
-    <div className="fixed inset-0 bg-dark-bg dark:bg-dark-bg z-50 flex flex-col items-center justify-center">
+    <div className="fixed inset-0 bg-dark-bg dark:bg-dark-bg z-50 flex items-center justify-center px-8">
       {/* Close Button */}
       <button
         onClick={toggleMenu}
-        className="absolute top-8 right-8 text-primary-400 hover:text-primary-300 text-3xl font-light transition-colors"
+        className="absolute top-8 right-8 text-white dark:text-white hover:text-primary-300 text-3xl font-light transition-colors"
         aria-label="Close menu"
       >
         ×
       </button>
 
-      {/* Horizontal Nav */}
-      <nav className="flex flex-col sm:flex-row items-center justify-center gap-8 w-full max-w-md px-8">
-        {/* Home Link */}
+      {/* Centered Horizontal Nav */}
+      <nav className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full max-w-md">
+        {/* Home Link - WHITE for visibility */}
         <Link
           to="/"
           onClick={onNavLinkClick}
-          className="text-2xl font-playfair font-bold text-primary-400 hover:text-primary-300 transition-colors"
+          className="text-3xl font-playfair font-bold text-white dark:text-white hover:text-primary-300 transition-colors"
         >
           Home
         </Link>
@@ -49,7 +49,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, toggleMenu, onNav
         <Link
           to="/book"
           onClick={onNavLinkClick}
-          className="px-8 py-3 bg-gradient-gold text-primaryDark font-bold text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+          className="px-10 py-4 bg-gradient-gold text-primaryDark font-bold text-xl rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
         >
           Book Now
         </Link>
@@ -58,4 +58,4 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ isOpen, toggleMenu, onNav
   );
 };
 
-export default HamburgerMenu;// MENU STYLE V2 1763079858
+export default HamburgerMenu;
