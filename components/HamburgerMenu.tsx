@@ -39,7 +39,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
 
       {/* Full-screen overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-dark-bg dark:bg-dark-bg z-[60] flex flex-col items-center justify-start px-4 pt-6 pb-16">
+        <div className="fixed inset-0 bg-dark-bg dark:bg-dark-bg z-[70] flex flex-col items-center justify-start px-4 pt-6 pb-16">
           <nav className="flex flex-row items-center justify-center gap-4 w-full max-w-sm">
             <Link
               to="/"
