@@ -6,6 +6,7 @@ import HamburgerMenu from './HamburgerMenu';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -20,6 +21,16 @@ const Header: React.FC = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+  }, []);
+
+  // Add scroll listener
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -98,7 +109,9 @@ const Header: React.FC = () => {
               document.documentElement.classList.toggle("dark", newDark);
               localStorage.setItem("theme", newDark ? "dark" : "light");
             }}
-            className="p-2 rounded-full glass shadow-md hover:shadow-lg transition-all"
+            className={`p-2 rounded-full glass shadow-md hover:shadow-lg transition-all ${
+              isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
             aria-label="Toggle theme"
           >
             {isDark ? (
